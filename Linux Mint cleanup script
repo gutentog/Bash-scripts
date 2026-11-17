@@ -1,0 +1,25 @@
+
+#!/bin/bash
+
+echo "Starting Linux Mint cleanup..."
+
+echo "1. Cleaning package dependencies..."
+sudo apt autoremove --purge -y
+
+echo "2. Cleaning obsolete package downloads..."
+sudo apt autoclean
+
+echo "3. Cleaning downloaded package cache..."
+sudo apt clean
+
+echo "4. Cleaning old system journal logs..."
+sudo journalctl --vacuum-size=200M
+
+echo "5. Cleaning thumbnail cache..."
+rm -rf "$HOME/.cache/thumbnails/"*
+
+echo "Cleanup complete!"
+echo "Current disk usage:"
+df -h /
+
+
